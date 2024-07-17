@@ -1,6 +1,6 @@
 import axios from "axios";
-// const url = 'https://ledisbucket.onrender.com'
-const url = `http://localhost:4000`
+const url = 'https://oriontrading-backend.onrender.com'
+// const url = `http://localhost:4000`
 
 export const registerUser = (userData) => async (dispatch) => {
   try {
