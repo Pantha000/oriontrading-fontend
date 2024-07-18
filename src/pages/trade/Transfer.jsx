@@ -3,9 +3,36 @@ import robot from "../../assets/robot.png"
 import back from "../../assets/icon/back.png"
 
 import { useNavigate } from "react-router-dom"
+import { useDispatch, useSelector } from "react-redux"
+import { useEffect, useState } from "react"
+import getToken from "../../components/getToken"
+import { aiToSpot, clearError, clearSuccessATS } from "../../redux/actions/userAction"
+import {toast} from "react-toastify"
 
 const Transfer = () => {
+    const dispatch = useDispatch()
     const navigate = useNavigate()
+    const {user} = useSelector(state=>state.user)
+    const {atsloading, atssuccess, atserror} = useSelector(state=>state.transection)
+    const [amount, setAmount]  = useState()
+    
+    const handleTransfer = ()=>{
+        const userData = {
+            amount:parseFloat(amount)
+        }
+        const token = getToken()
+        dispatch(aiToSpot(userData, token))
+    }
+    useEffect(()=>{
+        if(atssuccess){
+            toast(atssuccess)
+        }
+        dispatch(clearSuccessATS())
+        if(atserror){
+            toast(atserror)
+        }
+        clearError()
+    },[atssuccess, atserror])
   return (
     <div>
         <div className="container mx-auto pt-28 pb-12">
@@ -20,7 +47,7 @@ const Transfer = () => {
                 </div>
             </div>
             <div className="mt-8 ml-9">
-                <p className="font-medium text-md">AI Balance: <span>0.00</span> USDT</p>
+                <p className="font-medium text-md">AI Balance: <span>{user?.aiBalance.toFixed(2)}</span> USDT</p>
             </div>
             <div className="flex items-center justify-between ml-8">
                 <div className="w-7/12">
@@ -31,17 +58,14 @@ const Transfer = () => {
                         </div>
                         <div className="mt-5">
                             <label className="font-semibold text-md">To Wallet</label>
-                            <select className="border-[1px] border-[#CB0881] py-2 px-5 rounded-md w-full mt-2">
-                                <option>Spot</option>
-                                <option>Funding</option>
-                            </select>
+                            <div className="border-[1px] border-[#CB0881] py-2 px-5 rounded-md w-full mt-2">Spot</div>
                         </div>
                         <div className="mt-5">
                             <label className="font-semibold text-md">Amount</label>
-                            <input type="text" placeholder="Enter Amount" className="border-[1px] border-[#CB0881] py-2 px-5 rounded-md w-full mt-2"/>
+                            <input onChange={(e)=>setAmount(e.target.value)} type="text" placeholder="Enter Amount" className="border-[1px] border-[#CB0881] py-2 px-5 rounded-md w-full mt-2"/>
                         </div>
                         <div className="mt-5">
-                            <button className="px-10 py-2 bg-[#CB0881] rounded-full text-white font-medium">Transfer</button>
+                            <button onClick={handleTransfer} className="px-10 py-2 bg-[#CB0881] rounded-full text-white font-medium">{atsloading?"Loading...":"Transfer"}</button>
                         </div>
                     </div>
                 </div>

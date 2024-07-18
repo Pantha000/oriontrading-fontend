@@ -2,10 +2,12 @@ import back from "../../assets/icon/back.png"
 import deposit from "../../assets/deposit.png"
 import profile3 from "../../assets/pro.jpg"
 import { Link, useNavigate } from "react-router-dom"
-
+import {useSelector} from "react-redux"
 
 const AddFund = () => {
     const navigate = useNavigate()
+    const {user} = useSelector(state=>state.user)
+    const balance = user?.fundingBalance + user?.spotBalance + user?.aiBalance
   return (
     <div className="container mx-auto pt-28 pb-12">
         <div className="flex justify-between items-start">
@@ -26,8 +28,8 @@ const AddFund = () => {
         <div className="ml-12 mt-10">
             <Link to="/deposit" className="bg-[#CB0881] px-8 py-3 rounded-full text-xs text-white">Deposit Now</Link>
             <p className="text-md font-semibold mt-20 text-[#CB0881]">All History</p>
-            <p className="text-sm mt-5">0 items found</p>
-            <p className="text-sm font-medium mt-4"><span>Amount</span><span>USD $</span><span>0.00</span></p>
+            <p className="text-sm mt-5">{user?.deposit.length} items found</p>
+            <p className="text-sm font-medium mt-4"><span>Amount</span><span className="ml-5">USDT $</span><span>{balance.toFixed(2)}</span></p>
         </div>
         <div className="ml-12 mt-16 w-6/12">
             <div>

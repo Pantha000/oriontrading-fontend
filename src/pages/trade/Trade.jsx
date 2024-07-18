@@ -2,9 +2,11 @@ import stack from "../../assets/icon/stacks.png"
 import mode from "../../assets/icon/mode_off_on.png"
 import robot from "../../assets/robot.png"
 import { useNavigate } from "react-router-dom"
+import { useSelector } from "react-redux"
 
 const Trade = () => {
     const navigate = useNavigate()
+    const {user} = useSelector(state=>state.user)
   return (
     <div>
         <div className="container mx-auto pt-28 pb-12">
@@ -16,7 +18,7 @@ const Trade = () => {
                 </div>
             </div>
             <div className="mt-8">
-                <p className="font-medium text-md">AI Balance: <span>0.00</span> USDT</p>
+                <p className="font-medium text-md">AI Balance: <span>{user?.aiBalance.toFixed(2)}</span> USDT</p>
             </div>
             <div className="flex items-center justify-between">
                 <div className="w-7/12">

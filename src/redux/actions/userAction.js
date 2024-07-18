@@ -122,26 +122,7 @@ export const userVerification = (userData, token) => async (dispatch) => {
   }
 };
 
-//User Deposit
-export const userDeposit = (userData, token) => async (dispatch) => {
-  try {
-    dispatch({ type: "UserDepositRequest" });
-    const config = { headers: { "Content-Type": "multipart/form-data", Authorization:`Bearear ${token}` } };
 
-    const { data } = await axios.post(
-      `${url}/api/v1/user/deposit`,
-      userData,
-      config
-    );
-    dispatch({ type: "UserDepositSuccess", payload: data.message });
-    // console.log(data);
-  } catch (error) {
-    dispatch({
-      type: "UserDepositFail",
-      payload: error.response.data.message,
-    });
-  }
-};
 
 
 //Sent Password Token
@@ -206,21 +187,162 @@ export const updateProfile = (userData, token) => async (dispatch) => {
   }
 };
 
+//User Deposit
+export const userDeposit = (userData, token) => async (dispatch) => {
+  try {
+    dispatch({ type: "UserDepositRequest" });
+    const config = { headers: { "Content-Type": "multipart/form-data", Authorization:`Bearear ${token}` } };
+
+    const { data } = await axios.post(
+      `${url}/api/v1/user/deposit`,
+      userData,
+      config
+    );
+    dispatch({ type: "UserDepositSuccess", payload: data.message });
+    // console.log(data);
+  } catch (error) {
+    dispatch({
+      type: "UserDepositFail",
+      payload: error.response.data.message,
+    });
+  }
+};
+
+//User Withdraw
+export const userWithdraw = (userData, token) => async (dispatch) => {
+  try {
+    dispatch({ type: "UserWithdrawRequest" });
+    const config = { headers: { "Content-Type": "application/json", Authorization:`Bearear ${token}` } };
+
+    const { data } = await axios.post(
+      `${url}/api/v1/user/withdraw`,
+      userData,
+      config
+    );
+    dispatch({ type: "UserWithdrawSuccess", payload: data.message });
+    // console.log(data);
+  } catch (error) {
+    dispatch({
+      type: "UserWithdrawFail",
+      payload: error.response.data.message,
+    });
+  }
+};
+
+
+//OTS Transfer
+export const userOTSTransfer = (userData, token) => async (dispatch) => {
+  try {
+    dispatch({ type: "OTSTransferRequest" });
+    const config = { headers: { "Content-Type": "application/json", Authorization:`Bearear ${token}` } };
+
+    const { data } = await axios.put(
+      `${url}/api/v1/ots/transfer`,
+      userData,
+      config
+    );
+    dispatch({ type: "OTSTransferSuccess", payload: data.message });
+    // console.log(data);
+  } catch (error) {
+    dispatch({
+      type: "OTSTransferFail",
+      payload: error.response.data.message,
+    });
+  }
+};
+
+
+//Transfer Funding To Spot
+export const fundingToSpot = (userData, token) => async (dispatch) => {
+  try {
+    dispatch({ type: "FundingToSpotRequest" });
+    const config = { headers: { "Content-Type": "application/json", Authorization:`Bearear ${token}` } };
+
+    const { data } = await axios.put(
+      `${url}/api/v1/funding/to/spot`,
+      userData,
+      config
+    );
+    dispatch({ type: "FundingToSpotSuccess", payload: data.message });
+    // console.log(data);
+  } catch (error) {
+    dispatch({
+      type: "FundingToSpotFail",
+      payload: error.response.data.message,
+    });
+  }
+};
+
+//Transfer Spot
+export const spotTransfer = (userData, token) => async (dispatch) => {
+  try {
+    dispatch({ type: "SpotTransferRequest" });
+    const config = { headers: { "Content-Type": "application/json", Authorization:`Bearear ${token}` } };
+
+    const { data } = await axios.put(
+      `${url}/api/v1/spot/transfer`,
+      userData,
+      config
+    );
+    dispatch({ type: "SpotTransferSuccess", payload: data.message });
+    // console.log(data);
+  } catch (error) {
+    dispatch({
+      type: "SpotTransferFail",
+      payload: error.response.data.message,
+    });
+  }
+};
+
+//Transfer AI To Spot
+export const aiToSpot = (userData, token) => async (dispatch) => {
+  try {
+    dispatch({ type: "AIToSpotRequest" });
+    const config = { headers: { "Content-Type": "application/json", Authorization:`Bearear ${token}` } };
+
+    const { data } = await axios.put(
+      `${url}/api/v1/ai/to/spot`,
+      userData,
+      config
+    );
+    dispatch({ type: "AIToSpotSuccess", payload: data.message });
+    // console.log(data);
+  } catch (error) {
+    dispatch({
+      type: "AIToSpotFail",
+      payload: error.response.data.message,
+    });
+  }
+};
+
+
 //Clearing Errors
 export const clearError = () => async (dispatch) => {
   dispatch({ type: "ClearErrors" });
 };
 
-//Clearing Errors
+//Clearing Success
 export const clearSuccess = () => async (dispatch) => {
   dispatch({ type: "ClearSuccess" });
 };
-/* export const addToCart=(dispatch,product)=>{
 
-  
+//Clearing Success
+export const clearSuccessW = () => async (dispatch) => {
+  dispatch({ type: "ClearSuccessW" });
+};
+
+//Clearing Funding To Spot Success
+export const clearSuccessFTS = () => async (dispatch) => {
+  dispatch({ type: "ClearSuccessFTS" });
+};
+
+//Clearing  Spot Success
+export const clearSuccessST = () => async (dispatch) => {
+  dispatch({ type: "ClearSuccessST" });
+};
 
 
-} */
-export const addToCart = (product) => async (dispatch) => {
-  dispatch({ type: "addToCart" ,payload:product});
+//Clearing AI To Spot Success
+export const clearSuccessATS = () => async (dispatch) => {
+  dispatch({ type: "ClearSuccessATS" });
 };

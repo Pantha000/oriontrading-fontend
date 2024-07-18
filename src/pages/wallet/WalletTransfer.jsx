@@ -1,8 +1,37 @@
+import { useDispatch, useSelector } from "react-redux"
 import p2p from "../../assets/icon/p2p.png"
 import roadmap from "../../assets/roadmap.png"
 import WallatNav from "../../components/WallatNav"
+import { useEffect, useState } from "react"
+import getToken from "../../components/getToken"
+import {toast} from "react-toastify"
+import { clearError, clearSuccessST, spotTransfer } from "../../redux/actions/userAction"
 
 const WalletTransfer = () => {
+    const dispatch = useDispatch()
+    const {stloading, stsuccess, sterror} =useSelector(state=>state.transection)
+
+    const [amount, setAmount] = useState()
+    const [wallet, setWallet] = useState("AI")
+    const handleTransfer = () =>{
+        const userData = {
+            amount : parseFloat(amount),
+            wallet:wallet
+        }
+        const token = getToken()
+        dispatch(spotTransfer(userData, token))
+    }
+
+    useEffect(()=>{
+        if(stsuccess){
+            toast(stsuccess)
+        }
+        dispatch(clearSuccessST())
+        if(sterror){
+            toast(sterror)
+        }
+        clearError()
+    },[stsuccess, sterror])
   return (
     <div>
         <div className="container mx-auto pt-28 pb-12">
@@ -13,19 +42,17 @@ const WalletTransfer = () => {
                         <p className="font-semibold text-[#CB0881]">Transfer from Spot</p>
                         <div className="mt-5">
                             <label className="font-semibold text-sm">From Wallet</label>
-                            <select className="border-[1px] border-[#CB0881] py-2 px-5 rounded-md w-full mt-2">
-                                <option>AI</option>
-                                <option>Stake</option>
-                                <option>Features</option>
-                                <option>Funding</option>
+                            <select onChange={(e)=>setWallet(e.target.value)} className="border-[1px] border-[#CB0881] py-2 px-5 rounded-md w-full mt-2">
+                                <option value="AI">AI</option>
+                                <option value="Funding">Funding</option>
                             </select>
                         </div>
                         <div className="mt-5">
                             <label className="font-semibold text-sm">Amount</label>
-                            <input type="text" placeholder="Enter Amount" className="border-[1px] border-[#CB0881] py-2 px-5 rounded-md w-full mt-2"/>
+                            <input onChange={(e)=>setAmount(e.target.value)} type="text" placeholder="Enter Amount" className="border-[1px] border-[#CB0881] py-2 px-5 rounded-md w-full mt-2"/>
                         </div>
                         <div>
-                            <button className="px-10 py-2 bg-[#CB0881] rounded-full text-white font-medium mt-10">Transfer</button>
+                            <button onClick={handleTransfer} className="px-10 py-2 bg-[#CB0881] rounded-full text-white font-medium mt-10">{stloading?"Loading....":"Transfer"}</button>
                         </div>
                     </div>
                 </div>

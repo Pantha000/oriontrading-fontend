@@ -36,7 +36,7 @@ const Deposit = () => {
 
     const handleDeposit =()=>{
         const userData = {
-            amount: parseInt(amount),
+            amount: parseFloat(amount),
             trxProof:trxProof,
             trxId:trxId
         }

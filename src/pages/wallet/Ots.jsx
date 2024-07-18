@@ -1,19 +1,50 @@
-import React, { useState } from 'react';
+import  { useEffect, useState } from 'react';
 import WallatNav from '../../components/WallatNav';
+import {useDispatch, useSelector} from "react-redux"
+import { clearError, clearSuccess, userOTSTransfer } from '../../redux/actions/userAction';
+import getToken from "../../components/getToken.js"
+import {toast} from "react-toastify"
 
 const Ots = () => {
+    const dispatch = useDispatch()
+    const {user} = useSelector(state=>state.user)
+    const {oloading,osuccess, oerror} = useSelector(state=>state.transection)
+
     const [modal, setModal] = useState(false)
     const handelModal = () => {
         setModal(!modal)
         console.log(modal)
     }
+
+    const [amount, setAmount] = useState(null)
+    const [reciver, setReciver] = useState(null)
+
+    const handleTransfer = ()=>{
+        const userData = {
+            amount:parseFloat(amount),
+            reciver,
+            charge:0
+        }
+        const token = getToken()
+        dispatch(userOTSTransfer(userData, token))
+    }
+    useEffect(()=>{
+        if(osuccess){
+            toast(osuccess)
+        }
+        dispatch(clearSuccess())
+        if(oerror){
+            toast(oerror)
+        }
+        clearError()
+    }, [osuccess, oerror])
     return (
         <div className='pt-28 mx-auto container'>
             <WallatNav></WallatNav>
             <div className='m-10'>
                 <h1 className='text-primary text-2xl font-bold p-2'>Sent history</h1>
                 <h1 className='p-2 text-bold'>0 item found</h1>
-                <h1 className='p-2 text-bold'>Amount: 0.00 usd</h1>
+                <h1 className='p-2 text-bold'>Amount: {user?.fundingBalance.toFixed(2)} usdt</h1>
                 <button onClick={() => handelModal()} className='px-6 w-1/3 py-3 mt-4 rounded-xl bg-primary text-white'>Transfer</button>
             </div>
             <div className="ml-9 mt-10">
@@ -54,18 +85,18 @@ const Ots = () => {
 
                                 <div>
                                     <h1 className='text-primary  text-2xl text-center'>Ballance transfer </h1>
-                                    <h1 className=' text-center'>current ballance USD $0.00 </h1>
+                                    <h1 className=' text-center'>current ballance USD ${user?.fundingBalance.toFixed(2)} </h1>
                                     <div className='grid gap-2 my-5'>
                                         <p className='text-start'>Transfer to</p>
-                                        <input className=" mb-2 appearance-none border rounded py-2   focus:shadow-outline" id="amount" type="text" placeholder="user id"></input>
+                                        <input onChange={(e)=>setReciver(e.target.value)} className=" mb-2 appearance-none border rounded py-2   focus:shadow-outline" id="amount" type="text" placeholder="user id"></input>
                                   
                                         <p className='text-start'>Amount</p>
-                                        <input className=" appearance-none border rounded py-2   focus:shadow-outline" id="amount" type="text" placeholder="enter amount"></input>
+                                        <input onChange={(e)=>setAmount(e.target.value)} className=" appearance-none border rounded py-2   focus:shadow-outline" id="amount" type="text" placeholder="enter amount"></input>
                                     </div>
                                     <p className='text-start pb-5'>Service charge 0.00 usd</p>
                                 </div>
-                                <button data-modal-hide="popup-modal" type="button" className="text-white me-10 bg-primary rounded-xl hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 font-medium  text-sm inline-flex items-center px-5 py-2.5 text-center">
-                                    Yes, I'm sure
+                                <button onClick={handleTransfer} data-modal-hide="popup-modal" type="button" className="text-white me-10 bg-primary rounded-xl hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 font-medium  text-sm inline-flex items-center px-5 py-2.5 text-center">
+                                   {oloading ? "Loading..." : "Yes, I'm sure"}
                                 </button>
                                 <button onClick={() => handelModal()} data-modal-hide="popup-modal" type="button" className="py-2.5 px-5 ms-10 text-sm font-medium text-gray-900 focus:outline-none bg-white border border-gray-200 rounded-xl hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700">No, cancel</button>
                             </div>

@@ -29,6 +29,7 @@ const Profile = () => {
     const navigate = useNavigate()
     const dispatch = useDispatch()
     const {isAuthenticated, user} = useSelector(state=>state.user)
+    console.log(user)
 
 
     // const random = Math.floor(Math.random()* 100000-1+1 + 1)

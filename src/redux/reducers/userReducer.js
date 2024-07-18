@@ -185,9 +185,89 @@ export const userTransection = createReducer(initialState, (builder)=>{
     state.error = action.payload;
   })
 
+  builder.addCase("UserWithdrawRequest", (state)=>{
+    state.wloading = true;
+    state.error = null;
+  })
+  builder.addCase("UserWithdrawSuccess", (state, action)=>{
+    state.wloading = false;
+    state.wsuccess = action.payload;
+  })
+  builder.addCase("UserWithdrawFail", (state, action)=>{
+    state.wloading = false;
+    state.error = action.payload;
+  })
+
+  builder.addCase("FundingToSpotRequest", (state)=>{
+    state.ftsloading = true;
+    state.ftserror = null;
+  })
+  builder.addCase("FundingToSpotSuccess", (state, action)=>{
+    state.ftsloading = false;
+    state.ftssuccess = action.payload;
+  })
+  builder.addCase("FundingToSpotFail", (state, action)=>{
+    state.ftsloading = false;
+    state.ftserror = action.payload;
+  })
+  
+  builder.addCase("SpotTransferRequest", (state)=>{
+    state.stloading = true;
+    state.sterror = null;
+  })
+  builder.addCase("SpotTransferSuccess", (state, action)=>{
+    state.stloading = false;
+    state.stsuccess = action.payload;
+  })
+  builder.addCase("SpotTransferFail", (state, action)=>{
+    state.stloading = false;
+    state.sterror = action.payload;
+  })
+
+  builder.addCase("AIToSpotRequest", (state)=>{
+    state.atsloading = true;
+    state.atserror = null;
+  })
+  builder.addCase("AIToSpotSuccess", (state, action)=>{
+    state.atsloading = false;
+    state.atssuccess = action.payload;
+  })
+  builder.addCase("AIToSpotFail", (state, action)=>{
+    state.atsloading = false;
+    state.atserror = action.payload;
+  })
+
+
+  builder.addCase("OTSTransferRequest", (state)=>{
+    state.oloading = true;
+    state.oerror = null;
+  })
+  builder.addCase("OTSTransferSuccess", (state, action)=>{
+    state.oloading = false;
+    state.osuccess = action.payload;
+  })
+  builder.addCase("OTSTransferFail", (state, action)=>{
+    state.oloading = false;
+    state.oerror = action.payload;
+  })
 
   builder.addCase("ClearErrors", (state)=>{
-    state.error = null;
+    state.oerror = null;
+  })
+  builder.addCase("ClearSuccess", (state)=>{
+    state.osuccess = null;
+  })
+  builder.addCase("ClearSuccessW", (state)=>{
+    state.wsuccess = null;
+  })
+  builder.addCase("ClearSuccessFTS", (state)=>{
+    state.ftssuccess = null;
+  })
+  builder.addCase("ClearSuccessST", (state)=>{
+    state.stsuccess = null;
+  })
+  builder.addCase("ClearSuccessATS", (state)=>{
+    state.atssuccess = null;
   })
 })
 

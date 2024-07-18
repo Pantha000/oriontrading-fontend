@@ -2,17 +2,21 @@ import { useNavigate } from "react-router-dom"
 import p2p from "../../assets/icon/p2p.png"
 import roadmap from "../../assets/roadmap.png"
 import WallatNav from "../../components/WallatNav"
+import { useDispatch, useSelector } from "react-redux"
+import { useState } from "react"
 
 
 const Wallet = () => {
     const navigate = useNavigate()
-  return (
+    const {user} = useSelector(state=>state.user)
+  
+    return (
     <div>
         <div className="container mx-auto pt-28 pb-12">
             <div className="flex">
                 <div className="w-8/12">
                     <WallatNav></WallatNav>
-                    <p className="font-medium mt-10">0.00 USDT</p>
+                    <p className="font-medium mt-10">{user?.spotBalance.toFixed(2)} USDT</p>
                     <button onClick={()=>navigate("/wallet/transfer")} className="bg-[#CB0881] px-20 py-2 mr-8 rounded-md text-white mt-20">Transfer</button>
                 </div>
                 <div className="w-4/12">
