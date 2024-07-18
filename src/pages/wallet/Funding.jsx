@@ -7,6 +7,7 @@ import {useSelector} from "react-redux"
 const Funding = () => {
     const navigate=useNavigate()
     const {user} = useSelector(state=>state.user)
+    console.log(user)
     return (
         <div className='container mx-auto pt-28 pb-12'>
             <div><WallatNav></WallatNav>

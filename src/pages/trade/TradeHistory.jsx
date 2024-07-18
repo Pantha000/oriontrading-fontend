@@ -10,6 +10,10 @@ const TradeHistory = () => {
     const {user} = useSelector(state=>state.user)
     console.log(user.aiHistory)
     const monthArray = ["January", "February", "March", "April", "May", "June", "July", "Augest", "September", "Octber", "November","December"]
+
+    const totalHistoryAmount  = user?.aiHistory.reduce((accumulator, currentValue) => {
+        return accumulator + currentValue.history.amount
+      },0);
   return (
     <div className="container mx-auto pt-28 pb-12">
         <div className="flex justify-between items-start">
@@ -23,7 +27,7 @@ const TradeHistory = () => {
                         <button className="bg-[#f1f1f1] px-5 py-2 mr-8 rounded-md focus:bg-[#FCEEF8] border-[1px] focus:border-[#CB0881]">Team Bonus</button>
                     </div>
                     <input type="date" className="bg-[#FCEEF8] border-[#CB0881] border-[1px] w-full py-2 px-5 rounded-lg mt-10"/>
-                    <p className="text-[#CB0881] font-semibold mt-5">Total : $ 185 USDT</p>
+                    <p className="text-[#CB0881] font-semibold mt-5">Total : $ {totalHistoryAmount.toFixed(2)} USDT</p>
                 </div>
            </div>
            <div className="flex items-center">
@@ -76,7 +80,7 @@ const TradeHistory = () => {
                         </div>
                         <div className="flex items-center">
                             <img src={plus} className="mr-2 mt-[-3px]"/>
-                            <p>{val.history.amount.toFixed(2)}</p>
+                            <p>{val?.history.amount.toFixed(2)}</p>
                         </div>
                         <div className="">
                             <p>{formatDate}</p>
