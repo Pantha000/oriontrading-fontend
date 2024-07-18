@@ -53,12 +53,12 @@ const FundingHistory = () => {
 
                 if(hour>=12){
                     unit = `PM`
+                    hour = hour - 12
                 }else if(hour==24 || hour ==0){
                     unit= "AM"
                 }else{
                     unit = "AM"
                 }
-
 
                 return <div className="w-6/12 text-black" key={ind} >
                 <div className="w-[95%] bg-[#FCEEF8] mb-8 px-6 py-5  rounded-md">

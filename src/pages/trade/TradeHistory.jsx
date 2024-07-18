@@ -47,7 +47,6 @@ const TradeHistory = () => {
                       const month = fullDate.getMonth()
                       const year = fullDate.getFullYear()
                       const formatDate = `${date} ${monthArray[month]} ${year}`
-      
                       var hour  = fullDate.getHours()
                       var minute = fullDate.getMinutes()
       
@@ -56,7 +55,8 @@ const TradeHistory = () => {
                       }else{
                           hour = `${hour}`
                       }
-      
+                      
+
                       if(minute<10){
                           minute = `0${minute}`
                       }else{
@@ -67,6 +67,7 @@ const TradeHistory = () => {
       
                       if(hour>=12){
                           unit = `PM`
+                          hour = hour - 12
                       }else if(hour==24 || hour ==0){
                           unit= "AM"
                       }else{
@@ -86,7 +87,7 @@ const TradeHistory = () => {
                             <p>{formatDate}</p>
                         </div>
                         <div className="">
-                            <p>{unit}</p>
+                            <p>{hour}:{minute} {unit}</p>
                         </div>
                    </div>
                    <p className="text-center mt-5 font-semibold text-sm">{val.history.desc}</p>
