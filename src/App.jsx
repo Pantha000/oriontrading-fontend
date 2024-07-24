@@ -43,10 +43,21 @@ function App() {
   useEffect(()=>{
     const token = getToken()
     dispatch(loadUser(token))
+    
+    const onPageLoad = () => {
+      <Loading/>
+      // do something else
+    };
+    if (document.readyState === 'complete') {
+      onPageLoad();
+    } else {
+      window.addEventListener('load', onPageLoad, false);
+      // Remove the event listener when component unmounts
+      return () => window.removeEventListener('load', onPageLoad);
+    }
   },[])
   return (
     <div>
-      <Loading/>
       <ToastContainer/>
       <ScrollToTop/>
       <Navbar/>
