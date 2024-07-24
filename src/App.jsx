@@ -37,7 +37,7 @@ function App() {
 
    
   if(loading){
-    return <Loading/>
+    <Loading/>
   }
 
   useEffect(()=>{
