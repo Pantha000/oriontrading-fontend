@@ -33,7 +33,9 @@ import Loading from "./components/Loading";
 
 function App() {
   const dispatch = useDispatch()
+  // const {isAuthenticated} = useSelector(state=>state.user)
   const [isLoading, setIsLoading] = useState(true)
+  const [state, setState] = useState(true)
 
    
   // if(loading){
@@ -47,9 +49,12 @@ function App() {
     const preLoading = ()=>{
       setTimeout(()=>{
           setIsLoading(false)
+          setState(false)
       }, 30000)
     }
-    preLoading()
+    if(state){
+      preLoading()
+    }
   },[])
   return (
     <div>
