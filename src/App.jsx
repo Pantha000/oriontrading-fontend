@@ -24,14 +24,22 @@ import FundTransfer from "./pages/wallet/FundTransfer"
 import FundingHistory from "./pages/wallet/FundingHistory"
 import Ots from "./pages/wallet/Ots"
 import ProtectedRoute from "./components/ProtectedRoute"
-import {useDispatch} from "react-redux"
+import {useDispatch, useSelector} from "react-redux"
 import { useEffect } from "react"
 import {loadUser} from "./redux/actions/userAction"
 import getToken from "./components/getToken"
 import ResetPass from "./Shared/ResetPass";
+import Loading from "./components/Loading";
 
 function App() {
   const dispatch = useDispatch()
+  const {loading} = useSelector(state=>state.user)
+
+   
+  if(loading){
+    return <Loading/>
+  }
+
   useEffect(()=>{
     const token = getToken()
     dispatch(loadUser(token))
