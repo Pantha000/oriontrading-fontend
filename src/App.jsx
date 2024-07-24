@@ -47,7 +47,7 @@ function App() {
     const preLoading = ()=>{
       setTimeout(()=>{
           setIsLoading(false)
-      }, 20000)
+      }, 30000)
     }
     preLoading()
   },[])
