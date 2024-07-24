@@ -36,9 +36,9 @@ function App() {
   const {loading} = useSelector(state=>state.user)
 
    
-  if(loading){
-    <Loading/>
-  }
+  // if(loading){
+    
+  // }
 
   useEffect(()=>{
     const token = getToken()
@@ -46,6 +46,7 @@ function App() {
   },[])
   return (
     <div>
+      <Loading/>
       <ToastContainer/>
       <ScrollToTop/>
       <Navbar/>
