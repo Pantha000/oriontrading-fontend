@@ -25,7 +25,7 @@ import FundingHistory from "./pages/wallet/FundingHistory"
 import Ots from "./pages/wallet/Ots"
 import ProtectedRoute from "./components/ProtectedRoute"
 import {useDispatch, useSelector} from "react-redux"
-import { useEffect } from "react"
+import { useEffect, useState } from "react"
 import {loadUser} from "./redux/actions/userAction"
 import getToken from "./components/getToken"
 import ResetPass from "./Shared/ResetPass";
@@ -33,7 +33,7 @@ import Loading from "./components/Loading";
 
 function App() {
   const dispatch = useDispatch()
-  const {loading} = useSelector(state=>state.user)
+  const [isLoading, setIsLoading] = useState(true)
 
    
   // if(loading){
@@ -44,20 +44,16 @@ function App() {
     const token = getToken()
     dispatch(loadUser(token))
     
-    const onPageLoad = () => {
-      <Loading/>
-      // do something else
-    };
-    if (document.readyState === 'complete') {
-      onPageLoad();
-    } else {
-      window.addEventListener('load', onPageLoad, false);
-      // Remove the event listener when component unmounts
-      return () => window.removeEventListener('load', onPageLoad);
+    const preLoading = ()=>{
+      setTimeout(()=>{
+          setIsLoading(false)
+      }, 20000)
     }
+    preLoading()
   },[])
   return (
     <div>
+      {isLoading && <Loading/>}
       <ToastContainer/>
       <ScrollToTop/>
       <Navbar/>
