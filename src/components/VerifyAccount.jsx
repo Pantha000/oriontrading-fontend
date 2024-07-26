@@ -4,14 +4,13 @@ import back from "../assets/nid-back.png"
 import front from "../assets/nid-font.png"
 import {useSelector, useDispatch} from "react-redux"
 import { useEffect, useState } from "react"
-import { userVerification } from "../redux/actions/userAction"
+import { clearError, clearSuccess, userVerification } from "../redux/actions/userAction"
 import getToken from "./getToken"
 import { toast } from "react-toastify"
 
 const VerifyAccount = ({setVerifyAccount}) => {
     const dispatch = useDispatch()
-    const {loading, success} = useSelector(state=>state.verification)
-    console.log(success)
+    const {loading, success, error} = useSelector(state=>state.verification)
     const [type, setType] = useState("NID")
     const [dob, setDob] = useState()
     const [document, setDocument] = useState()
@@ -51,25 +50,42 @@ const VerifyAccount = ({setVerifyAccount}) => {
       }
   };
   const handleVerify = ()=>{
-    const userData = {
-        font:font,
-        back:backP,
-        selfie:selfieP,
-        type:type,
-        dob:dob,
-        document:document,
+    if(!font){
+        toast("Font picture is required")
+    }else if(!backP){
+        toast("Back picture is required")
+    }else if(!selfieP){
+        toast("Selfie is required")
+    }else if(!document){
+        toast("Document Number is required")
+    }else if(!dob){
+        toast("Date of Birth is required")
+    }else{
+        const userData = {
+            font:font,
+            back:backP,
+            selfie:selfieP,
+            type:type,
+            dob:dob,
+            document:document,
+        }
+        const token = getToken()
+        dispatch(userVerification(userData, token))
     }
-    const token = getToken()
-    dispatch(userVerification(userData, token))
     // console.log(userData)
   }
   useEffect(()=>{
     if(success){
         toast(success)
     }
-  },[success])
+    dispatch(clearSuccess())
+    if(error){
+        toast(error)
+    }
+    clearError()
+  },[success, error])
   return (
-    <div className="fixed top-0 left-0 h-[100%] w-[100%] bg-background-opacity flex justify-center items-center">
+    <div className="fixed top-0 left-0  z-50 h-[100%] w-[100%] bg-background-opacity flex justify-center items-center">
         <div className="bg-white w-6/12 px-10 py-10">
             <div className="flex justify-between">
                 <div className="flex items-center  ">

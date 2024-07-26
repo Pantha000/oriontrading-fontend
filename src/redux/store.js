@@ -1,6 +1,6 @@
 import { configureStore } from "@reduxjs/toolkit";
 
-import {forgotPasswordReducer, updateReducer, userReducer, userTransection, verificationReducer} from "./reducers/userReducer"
+import {forgotPasswordReducer, tradeReducer, updateReducer, userReducer, userTransection, verificationReducer} from "./reducers/userReducer"
 
 
 
@@ -11,6 +11,7 @@ const store = configureStore({
    verification : verificationReducer,
    transection:userTransection,
    update:updateReducer,
+   trade:tradeReducer
   },
 });
 

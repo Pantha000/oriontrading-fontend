@@ -271,3 +271,28 @@ export const userTransection = createReducer(initialState, (builder)=>{
   })
 })
 
+
+export const tradeReducer = createReducer(initialState, (builder)=>{
+
+  builder.addCase("TradeStatusRequest", (state)=>{
+    state.loading = true;
+    state.error = null;
+  })
+  builder.addCase("TradeStatusSuccess", (state, action)=>{
+    state.loading = false;
+    state.success = action.payload;
+  })
+  builder.addCase("TradeStatusFail", (state, action)=>{
+    state.loading = false;
+    state.error = action.payload;
+  })
+
+ 
+
+  builder.addCase("ClearErrors", (state)=>{
+    state.error = null;
+  })
+  builder.addCase("ClearSuccess", (state)=>{
+    state.success = null;
+  })
+})

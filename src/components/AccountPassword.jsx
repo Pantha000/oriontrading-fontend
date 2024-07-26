@@ -6,7 +6,7 @@ import { useDispatch, useSelector } from "react-redux"
 import { clearError, clearSuccess, sentPasswordToken, updatePassword } from "../redux/actions/userAction"
 import getToken from "./getToken"
 
-const AccountPassword = () => {
+const AccountPassword = ({setPasswordModel}) => {
     const dispatch = useDispatch()
     const {loading, success, error, uloading} = useSelector(state=>state.update)
     const [oldPass, setOldPass] = useState()
@@ -15,8 +15,16 @@ const AccountPassword = () => {
     const [token, setToken] =useState()
 
     const handlePasswordChange =()=>{
-       if(pass === cPass){
-        const userData = {
+       if(pass !== cPass){
+        toast("Password Not Matched")
+       }else if(!oldPass){
+        toast("Old Password is required!")
+       }else if(!pass){
+        toast("Password is required!")
+       }else if(!token){
+        toast("Token is required!")
+       }else{
+         const userData = {
             oldPassword:oldPass,
             newPassword:pass,
             token:token
@@ -24,8 +32,6 @@ const AccountPassword = () => {
         const tokens = getToken()
         // console.log(userData)
         dispatch(updatePassword(userData, tokens))
-       }else{
-         toast("Password Not Matched")
        }
     }
     const handleSentToken = ()=>{
@@ -44,14 +50,14 @@ const AccountPassword = () => {
         dispatch(clearError())
     },[success, error,])
   return (
-    <div className="fixed top-0 left-0 h-[100%] w-[100%] bg-background-opacity flex justify-center items-center">
+    <div className="fixed top-0 left-0 z-50 h-[100%] w-[100%] bg-background-opacity flex justify-center items-center">
         <div className="bg-white w-5/12 px-10 py-10">
             <div className="flex justify-between">
                 <div className="flex items-center bg-[#CB084B] px-5 py-2 rounded-md">
                     <p className="text-white text-sm  font-medium">Account Password </p>
                     <img src={password} className="ml-5"/>
                 </div>
-                <button><img src={close}/></button>
+                <button onClick={()=>setPasswordModel(false)}><img src={close}/></button>
             </div>
             <div className="w-[95%] mt-10">
                 <div> 

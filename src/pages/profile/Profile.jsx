@@ -17,7 +17,7 @@ import logout from "../../assets/icon/logout.png"
 import { Link, useNavigate } from "react-router-dom";
 import {CopyToClipboard} from 'react-copy-to-clipboard';
 import AccountPassword from "../../components/AccountPassword";
-// import PhoneNumber from "../../components/PhoneNumber";
+import PhoneNumber from "../../components/PhoneNumber";
 import VerifyAccount from "../../components/VerifyAccount";
 import UpdateProfile from "../../components/UpdateProfile";
 
@@ -29,7 +29,7 @@ const Profile = () => {
     const navigate = useNavigate()
     const dispatch = useDispatch()
     const {isAuthenticated, user} = useSelector(state=>state.user)
-    console.log(user)
+    const balance = user?.spotBalance + user?.fundingBalance + user?.aiBalance
 
 
     // const random = Math.floor(Math.random()* 100000-1+1 + 1)
@@ -37,6 +37,8 @@ const Profile = () => {
   const referLink = `http://oriontrading.com/r/${user?.reffer}`
 
   const [verifyAccount, setVerifyAccount] = useState(false)
+  const [profileModel, setProfileModel] = useState(false)
+  const [passwordModel, setPasswordModel] = useState(false)
 
     const redirect = location.search ? location.search.split("=")[1] : "/login";
     useEffect(()=>{
@@ -73,11 +75,11 @@ const Profile = () => {
                 </div>
                 <div className="w-full flex flex-col items-center">
                     <div className="flex items-center">
-                        <p className="bg-[#FCEEF8] py-2 w-52 text-center rounded-md">USDT Balance</p>
+                        <p className="bg-[#FCEEF8] py-2 w-52 text-center rounded-md">{balance.toFixed(2)} USDT</p>
                         <button onClick={()=>navigate("/add-fund")} className="bg-[#CB087D] py-2 px-6 ml-5 rounded-md text-white">Add Fund</button>
                     </div>
                     <div className="flex items-center mt-5">
-                        <p className="bg-[#FCEEF8] py-2 w-52 text-center rounded-md">OTS Balance</p>
+                        <p className="bg-[#FCEEF8] py-2 w-52 text-center rounded-md">120.00 BZIT</p>
                         <button onClick={()=>navigate("/exchange")} className="bg-[#CB087D] py-2 px-6 ml-5 rounded-md text-white">Exchange</button>
                     </div>
                 </div>
@@ -103,18 +105,18 @@ const Profile = () => {
                     <li cls><img src={logout}/><Link>Logout</Link></li> */}
                     
                     <Link className="flex items-center bg-[#FCEEF8] py-4 px-5 w-[18rem] rounded-xl"><img src={support}/><p className="ml-5 font-medium text-lg text-[#CB087D]">Support</p></Link>
-                    <Link className="flex items-center bg-[#FCEEF8] py-4 px-5 w-[18rem] rounded-xl mt-3"><img src={profile}/><p className="ml-5 font-medium text-lg text-[#CB087D]">Profile</p></Link>
-                    <Link className="flex items-center bg-[#FCEEF8] py-4 px-5 w-[18rem] rounded-xl mt-3"><img src={security}/><p className="ml-5 font-medium text-lg text-[#CB087D]">Security</p></Link>
+                    <Link className="flex items-center bg-[#FCEEF8] py-4 px-5 w-[18rem] rounded-xl mt-3" onClick={()=>setProfileModel(true)}><img src={profile}/><p className="ml-5 font-medium text-lg text-[#CB087D]">Profile</p></Link>
+                    <Link className="flex items-center bg-[#FCEEF8] py-4 px-5 w-[18rem] rounded-xl mt-3" onClick={()=>setPasswordModel(true)}><img src={security}/><p className="ml-5 font-medium text-lg text-[#CB087D]">Security</p></Link>
                     <Link className="flex items-center bg-[#FCEEF8] py-4 px-5 w-[18rem] rounded-xl mt-3"><img src={about}/><p className="ml-5 font-medium text-lg text-[#CB087D]">About Us</p></Link>
                     <Link className="flex items-center bg-[#FCEEF8] py-4 px-5 w-[18rem] rounded-xl mt-3"><img src={help}/><p className="ml-5 font-medium text-lg text-[#CB087D]">FAQ</p></Link>
                     <button className="flex items-center bg-[#CB087D] py-4 px-5 w-[18rem] rounded-xl mt-3" onClick={()=>dispatch(logOut())}><img src={logout}/><p className="ml-5 font-medium text-lg text-white">Logout</p></button>
                 </div>
             </div>
         </div>
-        {/* <AccountPassword/> */}
+        {passwordModel && <AccountPassword setPasswordModel={setPasswordModel}/>}
         {/* <PhoneNumber/> */}
         {verifyAccount && <VerifyAccount setVerifyAccount={setVerifyAccount}/>}
-        {/* <UpdateProfile/> */}
+        {profileModel && <UpdateProfile setProfileModel={setProfileModel}/>}
     </>
   )
 }

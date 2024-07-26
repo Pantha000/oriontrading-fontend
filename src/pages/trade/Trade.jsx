@@ -2,11 +2,28 @@ import stack from "../../assets/icon/stacks.png"
 import mode from "../../assets/icon/mode_off_on.png"
 import robot from "../../assets/robot.png"
 import { useNavigate } from "react-router-dom"
-import { useSelector } from "react-redux"
+import { useDispatch, useSelector } from "react-redux"
+import {  useState } from "react"
+import getToken from "../../components/getToken"
+import {  tradeStatus } from "../../redux/actions/userAction"
+
 
 const Trade = () => {
     const navigate = useNavigate()
+    const dispatch = useDispatch()
     const {user} = useSelector(state=>state.user)
+    const [bot, setBot] = useState(user?.tradeStatus)
+    const { loading} = useSelector(state=>state.trade)
+
+
+    const handleBot = ()=>{      
+        const userData = {
+            status : user.tradeStatus
+        }
+        const token = getToken()
+        dispatch(tradeStatus(userData, token))
+        setBot(!bot)
+    }
   return (
     <div>
         <div className="container mx-auto pt-28 pb-12">
@@ -32,7 +49,7 @@ const Trade = () => {
                                 <p className="text-2xl font-bold text-[#CB0881]">Current Status</p>
                                 <img src={mode} className="h-8 w-8 ml-4"/>
                             </div>
-                            <button className="mx-auto bg-[#f1f1f1] px-4 py-1 rounded-md block mt-4 font-medium text-[#CB0881]">Click to turn on</button>
+                            <button className="mx-auto bg-[#f1f1f1] px-4 py-1 rounded-md block mt-4 font-medium text-[#CB0881]" onClick={handleBot}>Click to turn {loading ? "wait": bot? "off":"on"}</button>
                         </div>
                     </div>
                 </div>

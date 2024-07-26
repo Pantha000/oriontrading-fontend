@@ -315,6 +315,26 @@ export const aiToSpot = (userData, token) => async (dispatch) => {
   }
 };
 
+//Transfer AI To Spot
+export const tradeStatus = (userData, token) => async (dispatch) => {
+  try {
+    dispatch({ type: "TradeStatusRequest" });
+    const config = { headers: { "Content-Type": "application/json", Authorization:`Bearear ${token}` } };
+
+    const { data } = await axios.put(
+      `${url}/api/v1/trade/status`,
+      userData,
+      config
+    );
+    dispatch({ type: "TradeStatusSuccess", payload: data.message });
+    // console.log(data);
+  } catch (error) {
+    dispatch({
+      type: "TradeStatusFail",
+      payload: error.response.data.message,
+    });
+  }
+};
 
 //Clearing Errors
 export const clearError = () => async (dispatch) => {

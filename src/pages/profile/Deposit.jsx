@@ -7,14 +7,14 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {toast} from "react-toastify"
 import getToken from "../../components/getToken"
-import { userDeposit } from "../../redux/actions/userAction";
+import { clearError, userDeposit } from "../../redux/actions/userAction";
 
 
 
 const Deposit = () => {
     const navigate = useNavigate()
     const dispatch = useDispatch()
-    const {loading, success} = useSelector(state=>state.transection)
+    const {loading, success, error} = useSelector(state=>state.transection)
     const [copied, setCopied] = useState(false)
     const depositLink = `hkhusfhfi./orangetour.com/review/explore`
 
@@ -35,13 +35,17 @@ const Deposit = () => {
     }
 
     const handleDeposit =()=>{
-        const userData = {
-            amount: parseFloat(amount),
-            trxProof:trxProof,
-            trxId:trxId
+        if(trxProof){
+            const userData = {
+                amount: parseFloat(amount),
+                trxProof:trxProof,
+                trxId:trxId
+            }
+            const token = getToken()
+            dispatch(userDeposit(userData, token))
+        }else{
+            toast("Transection proof is required!")
         }
-        const token = getToken()
-        dispatch(userDeposit(userData, token))
         // console.log(userData)
     }
 
@@ -49,7 +53,11 @@ const Deposit = () => {
         if(success){
             toast(success)
         }
-    },[success])
+        if(error){
+            toast(error)
+        }
+        clearError()
+    },[success, error])
   return (
     <div className="container mx-auto pt-28 pb-12">
         <div className="flex justify-between items-start">
