@@ -13,7 +13,7 @@ const Funding = () => {
             <div><WallatNav></WallatNav>
             <p>{user?.fundingBalance.toFixed(2)} usdt</p></div>
             <div className='grid grid-cols-4 gap-12 mx-20 mt-12 justify-center'>
-                <button className='bg-primary p-4 rounded-xl text-white font-semibold'>add</button>
+                <button className='bg-primary p-4 rounded-xl text-white font-semibold' onClick={()=>navigate("/add-fund")}>add</button>
                 <button onClick={()=>navigate('/wallet/withdraw')} className='bg-primary p-4 rounded-xl text-white font-semibold'>withdraw</button>
                 <button onClick={()=>navigate('/wallet/fund-transfer')} className='bg-primary p-4 rounded-xl text-white font-semibold'>transfer</button>
                 <button onClick={()=>navigate('/wallet/funding-history')} className='bg-primary p-4 rounded-xl text-white font-semibold'>history</button>
