@@ -34,11 +34,11 @@ const Transfer = () => {
         clearError()
     },[atssuccess, atserror])
   return (
-    <div>
+    <div className="px-5 lg:px-0">
         <div className="container mx-auto pt-28 pb-12">
             <div className="flex justify-between items-center">
                 <div className="flex">
-                    <img src={back} className="mr-4 h-5 w-5 cursor-pointer" onClick={()=>navigate(-1)}/>
+                    <img src={back} className="mr-4 h-5 w-5 cursor-pointer hidden lg:block" onClick={()=>navigate(-1)}/>
                     <p className="text-xl text-[#CB087D] font-semibold">Transfer from AI</p>
                 </div>
                 <div className="flex items-center">
@@ -46,11 +46,11 @@ const Transfer = () => {
                     <p className="text-[#CB087D] font-semibold ml-3">Level : <span>0</span></p>
                 </div>
             </div>
-            <div className="mt-8 ml-9">
+            <div className="mt-8 lg:ml-9">
                 <p className="font-medium text-md">AI Balance: <span>{user?.aiBalance.toFixed(2)}</span> USDT</p>
             </div>
-            <div className="flex items-center justify-between ml-8">
-                <div className="w-7/12">
+            <div className="flex flex-col-reverse lg:flex-row items-center justify-between lg:ml-8">
+                <div className="w-full lg:w-7/12">
                     <div>
                         <div>
                             <label className="font-semibold text-md">From Wallet</label>
@@ -69,19 +69,12 @@ const Transfer = () => {
                         </div>
                     </div>
                 </div>
-                <div className="w-5/12 flex justify-center">
-                    <img  src={robot}/>
+                <div className="w-full lg:w-5/12 flex lg:justify-center">
+                    <img className="h-56 w-56 my-5 lg:my-0"  src={robot}/>
                 </div>
             </div>
         </div>
-        <div className="border-t-2 border-[#CB0881] py-20 w-[100%] ">
-            <div className="container mx-auto  ">
-               <div className="w-8/12 flex justify-between ml-8">
-                    <button className="py-2 w-4/12 bg-[#CB0881] rounded-lg text-white font-medium">Profit Ratio</button>
-                    <button className="py-2 w-5/12 ml-4 bg-[#CB0881] rounded-lg text-white font-medium">Proposed Information</button>
-               </div>
-            </div>
-        </div>
+      
     </div>
   )
 }

@@ -86,7 +86,7 @@ const VerifyAccount = ({setVerifyAccount}) => {
   },[success, error])
   return (
     <div className="fixed top-0 left-0  z-50 h-[100%] w-[100%] bg-background-opacity flex justify-center items-center">
-        <div className="bg-white w-6/12 px-10 py-10">
+        <div className="bg-white w-11/12 lg:w-6/12 px-10 py-10">
             <div className="flex justify-between">
                 <div className="flex items-center  ">
                     <p className="text-[#CB084B] text-md font-medium">Verify Your Account </p>

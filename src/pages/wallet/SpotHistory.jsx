@@ -5,87 +5,95 @@ import WallatNav from "../../components/WallatNav"
 import {useSelector} from "react-redux"
 
 const SpotHistory = () => {
-    const navigate = useNavigate()
     const {user} = useSelector(state=>state.user)
-    console.log(user.spotHistory)
     const monthArray = ["January", "February", "March", "April", "May", "June", "July", "Augest", "September", "Octber", "November","December"]
   return (
-    <div className="container mx-auto pt-28 pb-12">
-        <div className="flex justify-between items-start">
-           <div className="flex items-start">
-                <img src={back} className="mr-4  h-4 w-4 cursor-pointer" onClick={()=>navigate(-1)}/>
-                <div>
-                    <WallatNav></WallatNav>
-                    <p className="text-[#CB0881] font-semibold mt-10 text-xl">Spot History</p>
+    <div className="container mx-auto pt-28 pb-12 px-4 sm:px-6 md:px-8">
+    <div className="flex  justify-between items-start">
+        <div className="items-start w-full">
+            <div className="">
+                <WallatNav />
+                <p className="text-[#CB0881] font-semibold mt-4 sm:mt-10 text-xl sm:text-2xl">Spot History</p>
+            </div>
+        </div>
+    </div>
+    <div className="flex flex-wrap gap-4 mt-6 sm:mt-10 ml-0 sm:ml-9">
+        <button className="px-4 py-2 sm:px-5 sm:py-2 mr-4 bg-[#FCEEF8] border-b-[1px] border-[#CB0881] rounded-t-md text-xs sm:text-sm">
+            All
+        </button>
+        <button className="px-4 py-2 sm:px-5 sm:py-2 mr-4 bg-[#f1f1f2] hover:bg-[#FCEEF8] border-b-[1px] hover:border-[#CB0881] rounded-t-md text-xs sm:text-sm">
+            In
+        </button>
+        <button className="px-4 py-2 sm:px-5 sm:py-2 mr-4 bg-[#f1f1f2] hover:bg-[#FCEEF8] border-b-[1px] hover:border-[#CB0881] rounded-t-md text-xs sm:text-sm">
+            Out
+        </button>
+    </div>
+    <div className="flex flex-wrap gap-4 mt-6 sm:mt-10">
+    { user?.spotHistory.map((val, ind)=>{
+         const fullDate = new Date(val.history.createdAt)
+         const date = fullDate.getDate()
+         const month = fullDate.getMonth()
+         const year = fullDate.getFullYear()
+         const formatDate = `${date} ${monthArray[month]} ${year}`
+
+         var hour  = fullDate.getHours()
+         var minute = fullDate.getMinutes()
+
+         if(hour<10){
+             hour = `0${hour}`
+         }else{
+             hour = `${hour}`
+         }
+
+         if(minute<10){
+             minute = `0${minute}`
+         }else{
+              minute = `${minute}`
+         }
+         
+         var unit;
+
+         if(hour>=12){
+            unit = `PM`
+            hour = hour - 12
+        }else if(hour==24 || hour ==0){
+            unit= "AM"
+        }else{
+            unit = "AM"
+        }
+        return <div className="w-full sm:w-6/12 lg:w-4/12 text-black" key={ind}>
+        <div className="bg-[#FCEEF8] mb-6 sm:mb-8 px-4 sm:px-6 py-4 sm:py-5 rounded-md shadow-sm">
+            <div className="flex flex-col sm:flex-row items-center justify-between font-semibold text-xs sm:text-sm">
+                <div className="flex-1 text-center sm:text-left">
+                    <p className="truncate">{val.history._id}</p>
                 </div>
-           </div>
-           
-        </div>
-        <div className="ml-9 mt-10">
-            <button className=" px-5 py-2 mr-8   bg-[#FCEEF8] border-b-[1px] border-[#CB0881] rounded-t-md">All</button>
-            <button className=" px-5 py-2 mr-8 bg-[#f1f1f2]  focus:bg-[#FCEEF8] border-b-[1px] focus:border-[#CB0881] rounded-t-md">In</button>
-            <button className=" px-5 py-2 mr-8 bg-[#f1f1f2]  focus:bg-[#FCEEF8] border-b-[1px] focus:border-[#CB0881] rounded-t-md">Out</button>
-        </div>
-        <div className="flex flex-wrap ml-8 mt-10">
-            { user?.spotHistory.map((val, ind)=>{
-                 const fullDate = new Date(val.history.createdAt)
-                 const date = fullDate.getDate()
-                 const month = fullDate.getMonth()
-                 const year = fullDate.getFullYear()
-                 const formatDate = `${date} ${monthArray[month]} ${year}`
- 
-                 var hour  = fullDate.getHours()
-                 var minute = fullDate.getMinutes()
- 
-                 if(hour<10){
-                     hour = `0${hour}`
-                 }else{
-                     hour = `${hour}`
-                 }
- 
-                 if(minute<10){
-                     minute = `0${minute}`
-                 }else{
-                      minute = `${minute}`
-                 }
-                 
-                 var unit;
- 
-                 if(hour>=12){
-                    unit = `PM`
-                    hour = hour - 12
-                }else if(hour==24 || hour ==0){
-                    unit= "AM"
-                }else{
-                    unit = "AM"
-                }
-                return <div className="w-6/12 text-black" key={ind} >
-                <div className="w-[95%] bg-[#FCEEF8] mb-8 px-6 py-5  rounded-md">
-                   <div className="flex items-center justify-around font-semibold text-sm">
-                        <div>
-                            <p>{val.history._id}</p>
-                        </div>
-                        <div className="flex items-center">
-                            <img src={plus} className="mr-2 mt-[-3px]"/>
-                            <p>{val.history.amount.toFixed(2)}</p>
-                        </div>
-                        <div className="">
-                            <p>{formatDate}</p>
-                        </div>
-                        <div className="">
-                            <p>{hour}:{minute} {unit}</p>
-                        </div>
-                   </div>
-                   <p className="text-center mt-5 font-semibold text-sm">{val.history.desc}</p>
-                   <p  className="text-center mt-3 font-semibold text-sm">{val.history.title}</p>
+                <div className="flex-1 flex items-center justify-center sm:justify-start">
+                    <img src={plus} className="mr-2 h-4 w-4" alt="Plus" />
+                    <p>{val.history.amount.toFixed(2)}</p>
+                </div>
+                <div className="flex-1 text-center sm:text-left">
+                    <p>{formatDate}</p>
+                </div>
+                <div className="flex-1 text-center sm:text-left">
+                    <p>{hour}:{minute} {unit}</p>
                 </div>
             </div>
-            })}
-            
+            <p className="text-center mt-4 sm:mt-5 font-semibold text-xs sm:text-sm">{val.history.desc}</p>
+            <p className="text-center mt-2 sm:mt-3 font-semibold text-xs sm:text-sm">{val.history.title}</p>
         </div>
-       
     </div>
+    })}
+    </div>
+</div>
+
   )
 }
 
 export default SpotHistory
+
+
+
+
+
+
+

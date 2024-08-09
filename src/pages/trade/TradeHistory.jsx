@@ -15,22 +15,22 @@ const TradeHistory = () => {
         return accumulator + currentValue.history.amount
       },0);
   return (
-    <div className="container mx-auto pt-28 pb-12">
+    <div className="container mx-auto pt-28 pb-12 px-5 lg:px-0">
         <div className="flex justify-between items-start">
-           <div className="flex items-start">
-                <img src={back} className="mr-4  h-4 w-4 cursor-pointer" onClick={()=>navigate(-1)}/>
+           <div className="flex flex-col lg:flex-row items-start">
+                <img src={back} className="mr-4  h-4 w-4 cursor-pointer hidden lg:block" onClick={()=>navigate(-1)}/>
                 <div>
                     <div>
-                        <button className="bg-[#f1f1f1] px-5 py-2 mr-8 rounded-md focus:bg-[#FCEEF8] border-[1px] focus:border-[#CB0881]">All</button>
-                        <button className="bg-[#f1f1f1] px-5 py-2 mr-8 rounded-md focus:bg-[#FCEEF8] border-[1px] focus:border-[#CB0881]">In</button>
-                        <button className="bg-[#f1f1f1] px-5 py-2 mr-8 rounded-md focus:bg-[#FCEEF8] border-[1px] focus:border-[#CB0881]">Out</button>
-                        <button className="bg-[#f1f1f1] px-5 py-2 mr-8 rounded-md focus:bg-[#FCEEF8] border-[1px] focus:border-[#CB0881]">Team Bonus</button>
+                        <button className="bg-[#f1f1f1] px-3 lg:px-5 py-2 mr-1 lg:mr-8 rounded-md focus:bg-[#FCEEF8] border-[1px] focus:border-[#CB0881]">All</button>
+                        <button className="bg-[#f1f1f1] px-3 lg:px-5 py-2 mr-1 lg:mr-8 rounded-md focus:bg-[#FCEEF8] border-[1px] focus:border-[#CB0881]">In</button>
+                        <button className="bg-[#f1f1f1] px-3 lg:px-5 py-2 mr-1 lg:mr-8 rounded-md focus:bg-[#FCEEF8] border-[1px] focus:border-[#CB0881]">Out</button>
+                        <button className="bg-[#f1f1f1] px-3 lg:px-5 py-2 mr-1 lg:mr-8 rounded-md focus:bg-[#FCEEF8] border-[1px] focus:border-[#CB0881]">Team Bonus</button>
                     </div>
                     <input type="date" className="bg-[#FCEEF8] border-[#CB0881] border-[1px] w-full py-2 px-5 rounded-lg mt-10"/>
                     <p className="text-[#CB0881] font-semibold mt-5">Total : $ {totalHistoryAmount.toFixed(2)} USDT</p>
                 </div>
            </div>
-           <div className="flex items-center">
+           <div className=" items-center hidden lg:flex">
                 <div className="w-24 h-24 rounded-full overflow-hidden border-2 border-[#CB087D]">
                     <img src={profile3} alt="Profile Image"/>
                 </div>

@@ -25,7 +25,7 @@ const Trade = () => {
         setBot(!bot)
     }
   return (
-    <div>
+    <div className="px-5 lg:px-0">
         <div className="container mx-auto pt-28 pb-12">
             <div className="flex justify-between items-center">
                 <p className="text-xl text-[#CB087D] font-semibold">AI Smart Trade</p>
@@ -37,8 +37,8 @@ const Trade = () => {
             <div className="mt-8">
                 <p className="font-medium text-md">AI Balance: <span>{user?.aiBalance.toFixed(2)}</span> USDT</p>
             </div>
-            <div className="flex items-center justify-between">
-                <div className="w-7/12">
+            <div className="flex flex-col-reverse lg:flex-row items-center justify-between">
+                <div className="w-full lg:w-7/12">
                     <div className="w-full">
                         <button onClick={()=>navigate("/trade/transfer")} className="py-2 w-5/12 bg-[#CB0881] rounded-lg text-white font-medium">Transfer</button>
                         <button onClick={()=>navigate("/trade/history")} className="py-2 w-5/12 ml-8 bg-[#CB0881] rounded-lg text-white font-medium">History</button>
@@ -53,19 +53,12 @@ const Trade = () => {
                         </div>
                     </div>
                 </div>
-                <div className="w-5/12 flex justify-center">
-                    <img  src={robot}/>
+                <div className="w-full lg:w-5/12 flex lg:justify-center">
+                    <img className="h-56 w-56 my-5 lg:my-0"  src={robot}/>
                 </div>
             </div>
         </div>
-        <div className="border-t-2 border-[#CB0881] py-20 w-[100%] ">
-            <div className="container mx-auto ">
-               <div className="w-8/12 flex justify-between">
-                    <button className="py-2 w-4/12 bg-[#CB0881] rounded-lg text-white font-medium">Profit Ratio</button>
-                    <button className="py-2 w-5/12 ml-4 bg-[#CB0881] rounded-lg text-white font-medium">Proposed Information</button>
-               </div>
-            </div>
-        </div>
+        
     </div>
   )
 }

@@ -49,14 +49,14 @@ const Profile = () => {
   
   return (
     <>
-        <div className="container mx-auto pt-28 pb-12 flex">
-            <div className="w-8/12 border-r-2 border-[#CB087D]">
-                <div className="flex items-center justify-around">
-                    <div className="flex items-center">
-                        <div className="w-36 h-36 rounded-full overflow-hidden border-2 border-[#CB087D]">
+        <div className="container mx-auto pt-28 pb-12 flex flex-col lg:flex-row">
+            <div className="w-full lg:w-8/12 border-b-2 pb-5 lg:pb-0 lg:border-r-2 border-[#CB087D]">
+                <div className="flex flex-col lg:flex-row items-center justify-around">
+                    <div className="flex items-start lg:items-center">
+                        <div className="w-28 h-28 lg:w-36 lg:h-36 rounded-full overflow-hidden border-2 border-[#CB087D]">
                             <img src={profile3} alt="Profile Image"/>
                         </div>
-                        <div className="ml-10">
+                        <div className="ml-5 lg:ml-10">
                             <p className="font-bold text-[#CB087D] text-xl">{user?.name}</p>
                             <div className="flex justify-between items-center text-[#CB087D] font-medium">
                                 <p className=""><span>UID:</span> <span >{user?.userId}</span></p>
@@ -65,7 +65,7 @@ const Profile = () => {
                             <button className="flex justify-center items-center mt-4 py-1 bg-[#FCEEF8] rounded-full text-[#CB0881] px-5"><img src={verified} className="h-5"/><p className="ml-2">{user?.verified?<p>Verified</p>:<p onClick={()=>setVerifyAccount(true)}>Not Verified</p>}</p></button>
                         </div>
                     </div>
-                    <div className="flex flex-col ml-10">
+                    <div className="flex flex-col ml-10 mt-10 lg:mt-0">
                         <button className="bg-[#CB087D] text-white font-medium w-44 py-2 rounded-full">C - Reccived</button>
                         <button className="bg-[#CB087D] text-white font-medium w-44 py-2 rounded-full mt-4">Invite</button>
                     </div>
@@ -84,7 +84,7 @@ const Profile = () => {
                     </div>
                 </div>
             </div>
-            <div className="w-4/12">
+            <div className="w-full lg:w-4/12 mt-10 lg:mt-0">
                 <div className="flex flex-col items-center">
                     <p className="font-semibold text-md mb-1">Refer Link</p>
                     <div>

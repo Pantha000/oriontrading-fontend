@@ -55,7 +55,7 @@ const UpdateProfile = ({setProfileModel}) => {
     },[success, error])
   return (
     <div className="fixed top-0 left-0 h-[100%] w-[100%] bg-background-opacity flex justify-center items-center overflow-y-auto py-10 z-50">
-        <div className="bg-white w-5/12 px-10 py-10 mt-20">
+        <div className="bg-white w-11/12 lg:w-5/12 px-10 py-10 mt-20">
             <div className="flex justify-between">
                 <div className="flex items-center bg-[#CB084B] px-5 py-2 rounded-md">
                     <p className="text-white text-sm  font-medium">Update Information </p>

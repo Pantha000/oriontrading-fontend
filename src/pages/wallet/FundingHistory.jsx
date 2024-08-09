@@ -9,10 +9,10 @@ const FundingHistory = () => {
     const {user} = useSelector(state=>state.user)
     const monthArray = ["January", "February", "March", "April", "May", "June", "July", "Augest", "September", "Octber", "November","December"]
     return (
-        <div className="container mx-auto pt-28 pb-12">
-        <div className="flex justify-between items-start">
-           <div className="flex items-start">
-                <img src={back} className="mr-4  h-4 w-4 cursor-pointer" onClick={()=>navigate(-1)}/>
+        <div className="container mx-auto pt-28 pb-12 px-5 lg:px-0">
+        <div className="flex  w-full items-start">
+           <div className=" items-start w-full">
+                <img src={back} className="mr-4  h-4 w-4 cursor-pointer hidden "  onClick={()=>navigate(-1)}/>
                 <div>
                     <WallatNav></WallatNav>
                     <p className="text-[#CB0881] font-semibold mt-10 text-xl">funding History</p>
@@ -20,13 +20,13 @@ const FundingHistory = () => {
            </div>
            
         </div>
-        <div className="ml-9 mt-10">
-            <button className=" px-5 py-2 mr-8   bg-[#FCEEF8] border-b-[1px] border-[#CB0881] rounded-t-md">All</button>
-            <button className=" px-5 py-2 mr-8 bg-[#f1f1f2]  focus:bg-[#FCEEF8] border-b-[1px] focus:border-[#CB0881] rounded-t-md">In</button>
-            <button className=" px-5 py-2 mr-8 bg-[#f1f1f2]  focus:bg-[#FCEEF8] border-b-[1px] focus:border-[#CB0881] rounded-t-md">Out</button>
-            <button className=" px-5 py-2 mr-8 bg-[#f1f1f2]  focus:bg-[#FCEEF8] border-b-[1px] focus:border-[#CB0881] rounded-t-md">Withdraw record</button>
+        <div className="flex flex-col lg:flex-row lg:ml-9 mt-10">
+            <button className=" px-5 py-2 mt-4 lg:mt-0 lg:mr-8   bg-[#FCEEF8] border-b-[1px] border-[#CB0881] rounded-t-md">All</button>
+            <button className=" px-5 py-2 mt-4 lg:mt-0 lg:mr-8 bg-[#f1f1f2]  focus:bg-[#FCEEF8] border-b-[1px] focus:border-[#CB0881] rounded-t-md">In</button>
+            <button className=" px-5 py-2 mt-4 lg:mt-0 lg:mr-8 bg-[#f1f1f2]  focus:bg-[#FCEEF8] border-b-[1px] focus:border-[#CB0881] rounded-t-md">Out</button>
+            <button className=" px-5 py-2 mt-4 lg:mt-0 lg:mr-8 bg-[#f1f1f2]  focus:bg-[#FCEEF8] border-b-[1px] focus:border-[#CB0881] rounded-t-md">Withdraw record</button>
         </div>
-        <div className="flex flex-wrap ml-8 mt-10">
+        <div className="flex flex-col lg:flex-row flex-wrap lg:ml-8 mt-10">
             { user?.fundingHistory.map((val, ind)=>{
                 const fullDate = new Date(val.history.createdAt)
                 const date = fullDate.getDate()
@@ -60,11 +60,11 @@ const FundingHistory = () => {
                     unit = "AM"
                 }
 
-                return <div className="w-6/12 text-black" key={ind} >
-                <div className="w-[95%] bg-[#FCEEF8] mb-8 px-6 py-5  rounded-md">
+                return <div className="w-full lg:w-6/12 text-black" key={ind} >
+                <div className="w-full lg:w-[95%] bg-[#FCEEF8] mb-8 px-6 py-5  rounded-md">
                    <div className="flex items-center justify-around font-semibold text-sm">
                         <div>
-                            <p>{val.history._id}</p>
+                            <p className='hidden lg:block'>{val.history._id}</p>
                         </div>
                         <div className="flex items-center">
                             <img src={plus} className="mr-2 mt-[-3px]"/>
