@@ -1,4 +1,5 @@
 
+import { Link } from 'react-router-dom';
 import profile from '../../assets/icon/profile.png';
 
 const Affilate = () => {
@@ -15,8 +16,10 @@ const Affilate = () => {
                         <h1 className='font-extrabold text-5xl'>$0.00</h1>
                     </div>
                     <div className='bg-bg2 rounded-xl p-8'>
-                        <h2 className='text-secondary font-semibold text-2xl'>Team Member</h2>
-                        <h1 className='font-extrabold text-5xl'>0</h1>
+                       <Link>
+                       <h2 className='text-secondary font-semibold text-2xl'>Team Member</h2>
+                       <h1 className='font-extrabold text-5xl'>0</h1>
+                       </Link>
                     </div>
                     <div className='bg-bg2 rounded-xl p-8'>
                         <h2 className='text-secondary font-semibold text-2xl'>Team Turnover</h2>
