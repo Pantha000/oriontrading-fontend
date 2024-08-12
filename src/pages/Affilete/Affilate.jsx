@@ -39,3 +39,4 @@ const Affilate = () => {
 };
 
 export default Affilate;
+

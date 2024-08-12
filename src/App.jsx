@@ -29,6 +29,7 @@ import { useEffect} from "react"
 import {loadUser} from "./redux/actions/userAction"
 import getToken from "./components/getToken"
 import ResetPass from "./Shared/ResetPass";
+import AffileteTeam from "./pages/Affilete/AffilateTeam";
 // import Loading from "./components/Loading";
 
 function App() {
@@ -74,6 +75,7 @@ function App() {
         <Route path="/exchange" element={<ProtectedRoute><Exchange/></ProtectedRoute>}/>
         <Route path="/trade" element={<ProtectedRoute><Trade/></ProtectedRoute>}/>
         <Route path="/affilate" element={<ProtectedRoute><Affilate></Affilate></ProtectedRoute>}/>
+        <Route path="/team" element={<ProtectedRoute><AffileteTeam/></ProtectedRoute>}/>
         <Route path="/trade/transfer" element={<ProtectedRoute><Transfer/></ProtectedRoute>}/>
         <Route path="/trade/history" element={<ProtectedRoute><TradeHistory/></ProtectedRoute>}/>
         <Route path="/wallet" element={<ProtectedRoute><Wallet/></ProtectedRoute>}/>
