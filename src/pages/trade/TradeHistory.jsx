@@ -73,7 +73,7 @@ const TradeHistory = () => {
                       }else{
                           unit = "AM"
                       }
-                return <div className="w-6/12 text-black" key={ind} >
+                return <div className="w-full lg:w-6/12 text-black" key={ind} >
                 <div className="w-[95%] bg-[#FCEEF8] mb-8 px-6 py-5  rounded-md">
                    <div className="flex items-center justify-around font-semibold text-sm">
                         <div>
