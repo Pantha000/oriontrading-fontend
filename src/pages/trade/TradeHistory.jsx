@@ -77,7 +77,7 @@ const TradeHistory = () => {
                 <div className="w-[95%] bg-[#FCEEF8] mb-8 px-6 py-5  rounded-md">
                    <div className="flex items-center justify-around font-semibold text-sm">
                         <div>
-                            <p>{val.history._id}</p>
+                            <p className="hidden lg:block">{val.history._id}</p>
                         </div>
                         <div className="flex items-center">
                             <img src={plus} className="mr-2 mt-[-3px]"/>

@@ -17,7 +17,7 @@ import logout from "../../assets/icon/logout.png"
 import { Link, useNavigate } from "react-router-dom";
 import {CopyToClipboard} from 'react-copy-to-clipboard';
 import AccountPassword from "../../components/AccountPassword";
-import PhoneNumber from "../../components/PhoneNumber";
+// import PhoneNumber from "../../components/PhoneNumber";
 import VerifyAccount from "../../components/VerifyAccount";
 import UpdateProfile from "../../components/UpdateProfile";
 

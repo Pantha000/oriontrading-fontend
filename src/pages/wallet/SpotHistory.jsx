@@ -65,7 +65,7 @@ const SpotHistory = () => {
         <div className="bg-[#FCEEF8] mb-6 sm:mb-8 px-4 sm:px-6 py-4 sm:py-5 rounded-md shadow-sm">
             <div className="flex flex-col sm:flex-row items-center justify-between font-semibold text-xs sm:text-sm">
                 <div className="flex-1 text-center sm:text-left">
-                    <p className="truncate">{val.history._id}</p>
+                    <p className="truncate hidden lg:block">{val.history._id}</p>
                 </div>
                 <div className="flex-1 flex items-center justify-center sm:justify-start">
                     <img src={plus} className="mr-2 h-4 w-4" alt="Plus" />
