@@ -17,7 +17,7 @@ const Navbar = () => {
             </div>
             <div className=" lg:flex items-center hidden ">
                 <li><Link to="/" className="bg-white px-3 py-1 ml-2 rounded-full text-[#CB0881] font-medium hover:shadow-nav-shadow">Home</Link></li>
-                <li><Link to="/market" className="bg-white px-3 py-1 ml-2 rounded-full text-[#CB0881] font-medium hover:shadow-nav-shadow">Market</Link></li>
+                {/* <li><Link to="/market" className="bg-white px-3 py-1 ml-2 rounded-full text-[#CB0881] font-medium hover:shadow-nav-shadow">Market</Link></li> */}
                 <li><Link to="/trade" className="bg-white px-3 py-1 ml-2 rounded-full text-[#CB0881] font-medium hover:shadow-nav-shadow">Trade</Link></li>
                 <li><Link to="/affilate" className="bg-white px-3 py-1 ml-2 rounded-full text-[#CB0881] font-medium hover:shadow-nav-shadow">Affiliate</Link></li>
                 <li><Link to="/wallet" className="bg-white px-3 py-1 ml-2 rounded-full text-[#CB0881] font-medium hover:shadow-nav-shadow">Wallet</Link></li>
