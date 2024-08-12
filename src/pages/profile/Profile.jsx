@@ -50,7 +50,7 @@ const Profile = () => {
   return (
     <>
         <div className="container mx-auto pt-28 pb-12 flex flex-col lg:flex-row">
-            <div className="w-full lg:w-8/12 border-b-2 pb-5 lg:pb-0 lg:border-r-2 border-[#CB087D]">
+            <div className="w-full lg:w-8/12 border-b-2 lg:border-b-0 pb-5 lg:pb-0 lg:border-r-2 border-[#CB087D]">
                 <div className="flex flex-col lg:flex-row items-center justify-around">
                     <div className="flex items-start lg:items-center">
                         <div className="w-28 h-28 lg:w-36 lg:h-36 rounded-full overflow-hidden border-2 border-[#CB087D]">
