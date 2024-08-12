@@ -61,7 +61,7 @@ const SpotHistory = () => {
         }else{
             unit = "AM"
         }
-        return <div className="w-full sm:w-6/12 lg:w-4/12 text-black" key={ind}>
+        return <div className="w-full  sm:w-6/12 lg:w-6/12 text-black" key={ind}>
         <div className="bg-[#FCEEF8] mb-6 sm:mb-8 px-4 sm:px-6 py-4 sm:py-5 rounded-md shadow-sm">
             <div className="flex flex-col sm:flex-row items-center justify-between font-semibold text-xs sm:text-sm">
                 <div className="flex-1 text-center sm:text-left">
