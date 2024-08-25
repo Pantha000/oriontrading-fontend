@@ -43,8 +43,9 @@ function App() {
     
   // }
 
+  const token = getToken()
+
   useEffect(()=>{
-    const token = getToken()
     dispatch(loadUser(token))
     
     // const preLoading = ()=>{
@@ -56,7 +57,7 @@ function App() {
     // if(state){
     //   preLoading()
     // }
-  },[])
+  },[token])
   return (
     <div>
       {/* {isLoading && <Loading/>} */}

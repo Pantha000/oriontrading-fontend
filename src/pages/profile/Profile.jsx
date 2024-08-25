@@ -40,12 +40,7 @@ const Profile = () => {
   const [profileModel, setProfileModel] = useState(false)
   const [passwordModel, setPasswordModel] = useState(false)
 
-    const redirect = location.search ? location.search.split("=")[1] : "/login";
-    useEffect(()=>{
-        if(!isAuthenticated){
-            return navigate(redirect)
-        }
-    },[isAuthenticated])
+   
   
   return (
     <>
